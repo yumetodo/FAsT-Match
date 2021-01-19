@@ -10,7 +10,7 @@
 #include <iomanip>
 #include <random>
 #include <tbb/tbb.h>
-
+#include <numbers>
 
 #define WITHIN( val, top_left, bottom_right ) (\
             val.x > top_left.x && val.y > top_left.y && \
@@ -46,8 +46,8 @@ namespace fast_match {
                 max_trans_x  = -min_trans_x,
                 min_trans_y  = -(r2y - r1y * minScale),
                 max_trans_y  = -min_trans_y,
-                min_rotation = -M_PI,
-                max_rotation =  M_PI;
+                min_rotation = -std::numbers::pi,
+                max_rotation =  std::numbers::pi;
         
         /* Create the matching grid / net */
         MatchNet net( templ.cols, templ.rows, delta, min_trans_x, max_trans_x, min_trans_y, max_trans_y,
@@ -176,9 +176,9 @@ namespace fast_match {
             nr2_steps = nr_steps;
         
         /* Refine the number of steps for the 2nd rotation parameter */
-        if( fabs((net.boundsRotate.second - net.boundsRotate.first) - (2 * M_PI)) < 0.1 ) {
+        if( fabs((net.boundsRotate.second - net.boundsRotate.first) - (2 * std::numbers::pi)) < 0.1 ) {
             nr2_steps = (int) count_if( r_steps.begin(), r_steps.end(), [&]( float r ){
-                return r < (-M_PI / 2  + net.stepsRotate / 2);
+                return r < (-std::numbers::pi / 2  + net.stepsRotate / 2);
             });
         }
         
