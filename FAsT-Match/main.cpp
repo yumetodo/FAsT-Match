@@ -38,9 +38,7 @@ int main(int argc, const char * argv[])
     line( image, corners[3], corners[0], Scalar(0, 0, 255), 2);
     
     Mat appended( image.rows, 2 * image.cols, CV_8UC3, Scalar(0, 0, 0) );
-    
-    auto font = fontQt("Helvetica", 14.0, CV_RGB(0, 255, 0) );
-    addText( appended, "Template: ", Point( 50, 50 ), font );
+    cv::putText(appended, "Template: ",  Point( 50, 50 ), cv::FONT_HERSHEY_SIMPLEX, 2.0, CV_RGB(0,255,0));
     templ.copyTo( Mat(appended, Rect((image.cols - templ.cols) / 2, (image.rows - templ.cols) / 2, templ.cols, templ.rows)) );
     image.copyTo( Mat(appended, Rect( image.cols, 0, image.cols, image.rows)) );
     
