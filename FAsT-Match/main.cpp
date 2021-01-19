@@ -23,7 +23,10 @@ int main(int argc, const char * argv[])
     }
     Mat image = imread( argv[1] );
     Mat templ = imread( argv[2] );
-    
+    if (image.empty() || templ.empty()) {
+        cerr << "Empty test images!" << endl;
+        return -1;
+    }
     fast_match::FAsTMatch fast_match;
     fast_match.init( 0.15f, 0.85f, false, 0.5f, 2.0f );
     vector<Point2f> corners = fast_match.apply( image, templ );
