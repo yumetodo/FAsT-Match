@@ -15,10 +15,10 @@
 #include "MatchNet.h"
 #include "MatchConfig.h"
 
-using namespace std;
-using namespace cv;
 
 namespace fast_match {
+    using namespace std;
+    using namespace cv;
     class FAsTMatch{
     public:
         FAsTMatch();
@@ -65,7 +65,7 @@ namespace fast_match {
 }
 
 template<typename type>
-ostream &operator <<( ostream& os, const std::pair<type, type> & vec ) {
+std::ostream &operator <<( std::ostream& os, const std::pair<type, type> & vec ) {
     os << "[";
     os << vec.first << " " << vec.second;
     os << "]";
@@ -73,9 +73,9 @@ ostream &operator <<( ostream& os, const std::pair<type, type> & vec ) {
 }
 
 template<typename type>
-ostream &operator <<( ostream& os, const vector<type> & vec ) {
+std::ostream &operator <<( std::ostream& os, const std::vector<type> & vec ) {
     os << "[";
-    std::copy( vec.begin(), vec.end(), ostream_iterator<type>(os, ", ") );
+    std::copy( vec.begin(), vec.end(), std::ostream_iterator<type>(os, ", ") );
     os << "]";
     return os;
 }
